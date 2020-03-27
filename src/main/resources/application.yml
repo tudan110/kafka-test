@@ -1,0 +1,24 @@
+kafka:
+  consumer:
+    auto:
+      commit:
+        interval: 100
+      offset:
+        reset: latest
+    concurrency: 10
+    enable:
+      auto:
+        commit: true
+    group:
+      id: test-consume-group
+    servers: xx.xx.xx.xxx:9092
+    session:
+      timeout: 6000
+  producer:
+    batch:
+      size: 4096
+    buffer:
+      memory: 40960
+    linger: 1
+    retries: 0
+    servers: 10.20.16.49:6667

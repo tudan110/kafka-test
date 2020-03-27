@@ -2,11 +2,13 @@ package indi.tudan.kafka;
 
 import indi.tudan.kafka.kafka.KafkaProducer;
 import indi.tudan.kafka.utils.SpringBeanUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {KafkaTestApplication.class})
 public class KafkaTestApplicationTests {
@@ -16,9 +18,14 @@ public class KafkaTestApplicationTests {
 
         KafkaProducer kafkaProducer = SpringBeanUtils.getBean(KafkaProducer.class);
 
-        for (int i = 0; i < 1; i++) {
-            //kafkaProducer.sendMessage("csbo_index_data", getMessage());
-            kafkaProducer.sendMessage("csbo_index_data", getMessage1());
+        for (int i = 0; i < 5; i++) {
+            //kafkaProducer.sendMessage0("csbo_index_data", getMessage1());
+            //if (kafkaProducer.sendMessage("csbo_index_data", getMessage())) {
+            if (kafkaProducer.sendMessage("csbo_index_data", getMessage1())) {
+                log.info("发送成功。");
+            } else {
+                log.info("发送失败。");
+            }
         }
     }
 
